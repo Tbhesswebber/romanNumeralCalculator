@@ -37,4 +37,4 @@ this project on a free hosting service like Firebase or AWS and make it public o
 - Handling decimals
 - Handling negatives
 
-Time used: 45min; 10:16am
+Time used: 45min + 135min (readme updated outside of time)
