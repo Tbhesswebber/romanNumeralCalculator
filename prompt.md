@@ -36,3 +36,5 @@ this project on a free hosting service like Firebase or AWS and make it public o
 - Authentication
 - Handling decimals
 - Handling negatives
+
+Time used: 45min;
