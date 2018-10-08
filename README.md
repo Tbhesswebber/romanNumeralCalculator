@@ -1,4 +1,4 @@
-# Holberg Financial Tech Challenge
+# Tech Challenge
 
 This project is a technical challene from Holberg Financial for a position as a software engineer.
 
