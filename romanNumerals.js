@@ -29,7 +29,23 @@ const arabicToRoman = {
   1000: 'M',
 };
 
-export function parseArabic(arabic = 0) {}
+export function parseArabic(arabic = 0) {
+  let [roman, current] = ['', arabic];
+  const pairs = Object.entries(arabicToRoman);
+  while (current > 0) {
+    // use a for loop for the break statement;
+    for (let i = 0; i < pairs.length; i += 1) {
+      const [currentArabic, currentRoman] = pairs[i];
+      const nextArabic = pairs[i + 1] ? pairs[i + 1][0] : Infinity;
+      if (+currentArabic <= current && +nextArabic > current) {
+        roman += currentRoman;
+        current -= currentArabic;
+        break;
+      }
+    }
+  }
+  return roman;
+}
 
 // ! this implementation will parse ANY roman numeral, not just valid ones.
 export function parseRoman(roman = '') {

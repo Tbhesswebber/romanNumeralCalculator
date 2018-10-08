@@ -1,4 +1,4 @@
-import { parseRoman } from './romanNumerals';
+import { parseRoman, parseArabic } from './romanNumerals';
 
 describe('parseRoman', () => {
   it('should be a function', () => {
@@ -29,5 +29,37 @@ describe('parseRoman', () => {
     expect(ninetyNine).toBe(99);
     expect(oneHundredNinety).toBe(190);
     expect(oneThousandFourHundredFortyNine).toBe(1449);
+  });
+});
+
+describe('parseArabic', () => {
+  it('should be a function', () => {
+    expect(parseArabic).toBeInstanceOf(Function);
+  });
+
+  it('should return a string', () => {
+    expect(typeof parseArabic()).toBe('string');
+  });
+
+  it('should handle the additive property of roman numerals', () => {
+    const one = parseArabic(1);
+    const two = parseArabic(2);
+    const oneHundredFifty = parseArabic(150);
+    const oneThousandFiveHundredFifteen = parseArabic(1515);
+    expect(one).toBe('I');
+    expect(two).toBe('II');
+    expect(oneHundredFifty).toBe('CL');
+    expect(oneThousandFiveHundredFifteen).toBe('MDXV');
+  });
+
+  it('should handle the subtractive property of roman numerals', () => {
+    const nine = parseArabic(9);
+    const ninetyNine = parseArabic(99);
+    const oneHundredNinety = parseArabic(190);
+    const oneThousandFourHundredFortyNine = parseArabic(1449);
+    expect(nine).toBe('IX');
+    expect(ninetyNine).toBe('XCIX');
+    expect(oneHundredNinety).toBe('CXC');
+    expect(oneThousandFourHundredFortyNine).toBe('MCDXLIX');
   });
 });
