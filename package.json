@@ -1,20 +1,29 @@
 {
   "name": "holberg_financial",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "Node_Env=test jest",
     "test-dev": "Node_Env=test jest --watch",
-    "lint": "eslint --ext .jsx --ext .js ."
+    "lint": "eslint --ext .jsx --ext .js .",
+    "start": "NODE_ENV=production node ./server/index.js",
+    "start-dev": "nodemon --exec babel-node -- ./server/index.js",
+    "build": "webpack --env.mode production",
+    "build-dev": "webpack-dev-server --env.mode development --env.presets dev-server --open --hot",
+    "prepush": "lint-staged"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
     "babel-preset-airbnb": "^2.6.0",
+    "css-loader": "^1.0.0",
     "eslint": "^5.6.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
@@ -23,10 +32,20 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.1.1",
     "jest": "^23.6.0",
     "jest-runner-eslint": "^0.6.0",
+    "lint-staged": "^7.3.0",
+    "nodemon": "^1.18.4",
     "prettier": "^1.14.3",
-    "regenerator-runtime": "^0.12.1"
+    "regenerator-runtime": "^0.12.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9",
+    "webpack-merge": "^4.1.4"
   },
   "jest": {
     "notify": true,
@@ -35,7 +54,8 @@
   "eslintConfig": {
     "extends": [
       "airbnb",
-      "prettier"
+      "prettier",
+      "prettier/react"
     ],
     "env": {
       "jest": true,
@@ -52,11 +72,52 @@
           "ignoreRestSiblings": false
         }
       ]
-    }
+    },
+    "parser": "babel-eslint"
   },
   "babel": {
     "presets": [
-      "airbnb"
+      "env",
+      "airbnb",
+      "react"
+    ],
+    "ignore": [
+      "node_modules",
+      "compiled"
+    ],
+    "plugins": [
+      "@babel/proposal-class-properties"
+    ]
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "helmet": "^3.13.0",
+    "morgan": "^1.9.1",
+    "ololog": "^1.1.112",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^3.4.9"
+  },
+  "description": "",
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add",
+      "jest --bail --findRelatedTests"
     ]
   }
 }
